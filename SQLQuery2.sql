@@ -1,0 +1,16 @@
+﻿SELECT * FROM Artist;
+SELECT * FROM Genre;
+SELECT * FROM Album;
+SELECT * FROM Song;
+SELECT * FROM Artist ORDER BY ArtistName;
+SELECT s.Title, a.ArtistName FROM Song  s LEFT JOIN Artist a on s.ArtistId=a.Id;
+SELECT ArtistName FROM Album a LEFT JOIN Artist b on a.ArtistId=b.Id WHERE GenreId=7;
+SELECT ArtistName FROM Album a LEFT JOIN Artist b on a.ArtistId=b.Id WHERE GenreId=2 OR GenreId=4;
+SELECT * FROM Album a  LEFT JOIN Song s ON s.AlbumId=a.Id WHERE s.SongLength IS NULL;
+SELECT s.Title, a.Title, b.ArtistName FROM Song s LEFT JOIN Album a ON s.AlbumId=a.Id LEFT JOIN Artist b ON s.ArtistId=b.Id WHERE b.Id=28;
+SELECT AlbumId, count(Id) AS songs_per_album FROM Song GROUP BY AlbumId;
+SELECT ArtistId, count(Id) AS Songs_per_artist FROM Song GROUP BY ArtistId;
+SELECT GenreId, count(Id) AS Songs_per_genre FROM Song GROUP BY GenreId;
+SELECT a.ArtistName FROM Artist a LEFT JOIN Album b ON a.Id=b.ArtistId GROUP BY a.ArtistName HAVING Count(Label)>1;
+SELECT TOP(1) MAX(AlbumLength) AS Length, Title AS Album FROM Album GROUP BY Title ORDER BY Length desc;
+SELECT TOP(1) MAX(SongLength) AS Length, s.Title AS Song, a.Title FROM Song s LEFT JOIN Album a ON s.AlbumId=a.Id GROUP BY s.Title, a.Title ORDER BY Length desc;
